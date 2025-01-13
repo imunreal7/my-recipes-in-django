@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Recipe Detail Card -->
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                {% if recipe.image %}
+                <img
+                    src="{{ recipe.image.url }}"
+                    alt="Recipe Image"
+                    class="card-img-top"
+                    style="height: 400px; object-fit: cover; transition: transform 0.5s ease-in-out"
+                    onmouseover="this.style.transform='scale(1.05)'"
+                    onmouseout="this.style.transform='scale(1)'"
+                />
+                {% endif %}
+                <div class="card-body">
+                    <!-- Recipe Title -->
+                    <h2 class="display-4 font-weight-bold text-dark">{{ recipe.title }}</h2>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <!-- Created By and Chef Information -->
+                        <div>
+                            <p class="text-muted">
+                                <strong>Created by:</strong> {{ recipe.created_by.username }}
+                            </p>
+                            <p class="text-muted">
+                                <strong>Chef:</strong> {{ recipe.chef.first_name }}
+                                {{recipe.chef.last_name }}
+                            </p>
+                            <!-- Created Date -->
+                            <p class="text-muted">
+                                <strong>Created on:</strong> {{ recipe.created_at|date:"F j, Y" }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Recipe Category -->
+                    <div class="mb-3">
+                        <h5 class="text-secondary">Categories:</h5>
+                        <div class="badge-container">
+                            {% for category in recipe.categories.all %}
+                            <span class="badge bg-warning">{{ category.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Recipe Description -->
+                    <div class="mb-4">
+                        <h4 class="text-primary">Description:</h4>
+                        <p>{{ recipe.description }}</p>
+                    </div>
+
+                    <!-- Ingredients Section -->
+                    <div class="mb-4">
+                        <h4 class="text-success">Ingredients:</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ recipe.ingredients }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Instructions Section -->
+                    <div class="mb-4">
+                        <h4 class="text-info">Instructions:</h4>
+                        <p>{{ recipe.instructions }}</p>
+                    </div>
+
+                    <!-- Ratings and Reviews -->
+                    <div class="mb-4">
+                        <h4 class="text-warning">Ratings and Reviews:</h4>
+                        <p>Average Rating: {{ recipe.average_rating|default:"No ratings yet" }}</p>
+                        <ul class="list-group">
+                            {% for review in recipe.reviews.all %}
+                            <li class="list-group-item">
+                                <strong>{{ review.user.username }}</strong> rated this recipe
+                                {{review.rating }}/5
+                                <p>{{ review.comment }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="card-footer d-flex justify-content-between bg-light py-3">
+                    <a href="{% url 'add_review' recipe.id %}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-star"></i> Add Review
+                    </a>
+                    <a href="{% url 'update_recipe' recipe.id %}" class="btn btn-warning btn-lg">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger btn-lg">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-arrow-left-circle"></i> Back to Recipes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

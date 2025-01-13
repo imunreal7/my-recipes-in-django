@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Profile Header -->
+            <div class="text-center mb-4">
+                <h2 class="display-4" style="color: #fb930b; font-weight: 700">
+                    Welcome, {{ user.username }}
+                </h2>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="card shadow-lg rounded-4 border-0 mb-4">
+                <div class="card-body p-10">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <!-- Profile Picture -->
+                            {% if user_profile.profile_picture %}
+                            <img
+                                src="{{ user_profile.profile_picture.url }}"
+                                alt="Profile Picture"
+                                class="img-fluid rounded-circle mb-3"
+                                style="
+                                    width: 150px;
+                                    height: 150px;
+                                    object-fit: cover;
+                                    border: 4px solid #fb930b;
+                                    transition: transform 0.3s ease;
+                                "
+                            />
+                            {% else %}
+                            <div class="mb-3">
+                                <i
+                                    class="fas fa-user-circle"
+                                    style="font-size: 150px; color: #fb930b"
+                                ></i>
+                            </div>
+                            {% endif %}
+                            <p class="text-muted">Profile Picture</p>
+                        </div>
+
+                        <div class="col-md-8">
+                            <!-- Profile Details -->
+                            <div class="mb-3">
+                                <p><strong>Email:</strong> {{ user.username }}</p>
+                                <p><strong>First Name:</strong> {{ user_profile.first_name }}</p>
+                                <p><strong>Last Name:</strong> {{ user_profile.last_name }}</p>
+                                <p><strong>Phone:</strong> {{ user_profile.phone }}</p>
+                                <p><strong>Address:</strong> {{ user_profile.address }}</p>
+                            </div>
+                            <!-- Edit Profile Button -->
+                            <div class="text-center mt-4">
+                                <a
+                                    href="{% url 'profile_edit' %}"
+                                    class="btn btn-warning btn-lg"
+                                    style="
+                                        border-radius: 50px;
+                                        font-weight: bold;
+                                        padding: 12px 30px;
+                                        transition: background-color 0.3s ease, transform 0.2s ease;
+                                        margin-right: 200px;
+                                    "
+                                >
+                                    Edit Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styling for Hover Effects -->
+<style>
+    .card {
+        background-color: #f8f9fa;
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07c23 !important;
+        transform: scale(1.05);
+    }
+
+    .img-fluid:hover {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
+

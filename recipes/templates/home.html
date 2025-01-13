@@ -1,0 +1,239 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Success Message -->
+{% if message %}
+<div
+    id="success-alert"
+    class="alert alert-success alert-dismissible fade show text-center mt-3"
+    role="alert"
+    style="width: 50%; margin: auto"
+>
+    <strong>Success!</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<!-- Hero Section -->
+<section
+    class="hero color-bg-gradient text-center py-5"
+    style="
+        background-image: url('/static/images/hero-bg.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    "
+>
+    <div class="container">
+        <h1 class="display-4 font-weight-bold mb-3 animated fadeInDown">
+            Welcome to the Recipe World!
+        </h1>
+        <p class="lead mb-4 animated fadeInUp">
+            Discover and share amazing recipes created by talented chefs from all around the world.
+        </p>
+        <a
+            href="{% url 'add_recipe' %}"
+            class="btn btn-success btn-lg rounded-pill shadow animated pulse infinite"
+            >Add Your Recipe</a
+        >
+    </div>
+</section>
+
+<!-- Search Bar Section -->
+<section class="search-section py-2 bg-light dark-theme-section">
+    <div class="container text-center">
+        <h2 class="mb-4">Looking for something specific?</h2>
+        <form method="get" class="d-flex justify-content-center align-items-center">
+            <input
+                type="text"
+                name="q"
+                value="{{ query }}"
+                class="form-control w-50 shadow-sm"
+                placeholder="Search for recipes..."
+                aria-label="Search recipes"
+            />
+            <button type="submit" class="btn btn-primary ms-2 shadow">Search</button>
+        </form>
+    </div>
+</section>
+
+<!-- Recipe Cards Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Explore Popular Recipes</h2>
+    <div
+        class="filter-group d-flex justify-content-between align-items-center"
+        style="margin-bottom: 20px"
+    >
+        <!-- Category Filter -->
+        <div class="dropdown me-2">
+            <button
+                class="btn btn-light dropdown-toggle shadow-sm"
+                type="button"
+                id="categoryDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                {% if selected_category %} {{ selected_category.name }} {% else %} Categories
+                {%endif %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                {% for category in categories %}
+                <li>
+                    <a
+                        class="dropdown-item {% if selected_category and selected_category.id == category.id %}active{% endif %}"
+                        href="?category={{ category.id }}"
+                    >
+                        {{ category.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Chef Filter -->
+        <div class="dropdown">
+            <button
+                class="btn btn-light dropdown-toggle shadow-sm"
+                type="button"
+                id="chefDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                {% if selected_chef %} {{ selected_chef.first_name }} {% else %} Chefs {% endif %}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="chefDropdown">
+                {% for chef in top_chefs %}
+                <li>
+                    <a
+                        class="dropdown-item {% if selected_chef and selected_chef.id == chef.id %}active{% endif %}"
+                        href="?chef={{ chef.id }}"
+                    >
+                        {{ chef.first_name }} {{ chef.last_name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-md-4 mb-4">
+            <div
+                class="card shadow-lg border-0 rounded-4 overflow-hidden hover-scale dark-theme-card"
+                style="transition: transform 0.3s"
+            >
+                {% if recipe.image %}
+                <img
+                    src="{{ recipe.image.url }}"
+                    alt="Recipe Image"
+                    class="card-img-top"
+                    style="height: 250px; object-fit: cover"
+                />
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-dark dark-theme-text">
+                        <a
+                            href="{% url 'recipe_detail' recipe.id %}"
+                            class="text-decoration-none text-dark dark-theme-text hover-underline"
+                            >{{ recipe.title }}</a
+                        >
+                    </h5>
+                    <p class="card-text dark-theme-text">
+                        {{ recipe.description|slice:":200" }}...
+                    </p>
+                    <div class="d-flex justify-content-between text-muted">
+                        <small><strong>By:</strong> {{ recipe.created_by.username }}</small>
+                        <small
+                            ><strong>Chef:</strong> {{ recipe.chef.user.first_name }}
+                            {{recipe.chef.user.last_name }}</small
+                        >
+                    </div>
+                </div>
+                <div
+                    class="card-footer d-flex justify-content-between bg-light dark-theme-card-footer py-2"
+                >
+                    <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-info btn-sm shadow"
+                        >Details</a
+                    >
+                    <a
+                        href="{% url 'update_recipe' recipe.id %}"
+                        class="btn btn-warning btn-sm shadow"
+                        >Edit</a
+                    >
+                    <a
+                        href="{% url 'delete_recipe' recipe.id %}"
+                        class="btn btn-danger btn-sm shadow"
+                        >Delete</a
+                    >
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Featured Chefs Section -->
+<section class="featured-chefs py-5 bg-dark text-light">
+    <div class="container text-center">
+        <h2 class="mb-4">Meet Our Top Chefs</h2>
+        <div class="row">
+            {% for chef in top_chefs %}
+            <div class="col-md-4">
+                {% if chef.profile_picture %}
+                <img
+                    src="{{ chef.profile_picture.url }}"
+                    alt="Chef {{ chef.first_name }} {{ chef.last_name }}"
+                    class="rounded-circle mb-3"
+                    style="width: 150px; height: 150px; object-fit: cover"
+                />
+                {% else %}
+                <img
+                    src="/static/images/default-profile.png"
+                    alt="Default Profile Picture"
+                    class="rounded-circle mb-3"
+                    style="width: 150px; height: 150px; object-fit: cover"
+                />
+                {% endif %}
+                <h5>{{ chef.first_name }} {{ chef.last_name }}</h5>
+                <p>{{ chef.address|default:"Expert Chef" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Subscription -->
+<section class="newsletter py-5 bg-light dark-theme-section">
+    <div class="container text-center">
+        <h2 class="mb-4">Join Our Newsletter</h2>
+        <p class="mb-4">
+            Get the latest recipes and cooking tips delivered straight to your inbox!
+        </p>
+        <form method="post" class="d-flex justify-content-center">
+            {% csrf_token %}
+            <input
+                type="email"
+                name="email"
+                class="form-control w-50 shadow-sm"
+                placeholder="Enter your email"
+                aria-label="Newsletter email"
+                required
+            />
+            <button type="submit" class="btn btn-primary ms-2 shadow">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    // Automatically hide the alert after 10 seconds
+    setTimeout(() => {
+        const alert = document.getElementById("success-alert");
+        if (alert) {
+            alert.style.transition = "opacity 0.5s ease-out";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500); // Remove element after fade-out
+        }
+    }, 10000);
+</script>
+
+{% endblock %}
+

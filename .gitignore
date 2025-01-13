@@ -1,0 +1,40 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+
+# Django
+*.log
+db.sqlite3
+media/
+
+# Environment
+.env
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*.pyd
+*.pyo
+*.so
+
+# Cache files
+*.swp
+*.swo
+*.bak
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Migrations
+migrations/
+
+# Pytest
+.pytest_cache/

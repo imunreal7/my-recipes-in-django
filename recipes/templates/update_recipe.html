@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Page Title -->
+            <h1
+                class="text-center display-5 mb-4 text-warning fw-bold"
+                style="text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5rem)"
+            >
+                Update Recipe
+            </h1>
+
+            <!-- Form Card -->
+            <div class="card shadow border-0 rounded-3">
+                <div class="card-body px-4 py-5">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Recipe Title -->
+                        <div class="mb-3">
+                            <label for="recipeTitle" class="form-label fw-bold text-primary"
+                                >Title</label
+                            >
+                            {{ form.title|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="recipeDescription" class="form-label fw-bold text-primary"
+                                >Description</label
+                            >
+                            {{ form.description|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Ingredients -->
+                        <div class="mb-3">
+                            <label for="recipeIngredients" class="form-label fw-bold text-primary"
+                                >Ingredients</label
+                            >
+                            {{ form.ingredients|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="mb-3">
+                            <label for="recipeInstructions" class="form-label fw-bold text-primary"
+                                >Instructions</label
+                            >
+                            {{ form.instructions|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="mb-3">
+                            <label for="recipeCategories" class="form-label fw-bold text-primary"
+                                >Categories</label
+                            >
+                            {{ form.categories|add_class:"form-select shadow-sm" }}
+                        </div>
+
+                        <!-- Recipe Image -->
+                        <div class="mb-3">
+                            <label for="recipeImage" class="form-label fw-bold text-primary"
+                                >Upload Image</label
+                            >
+                            {{ form.image|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Chef -->
+                        <div class="mb-3">
+                            <label for="recipeChef" class="form-label fw-bold text-primary"
+                                >Chef</label
+                            >
+                            {{ form.chef|add_class:"form-control shadow-sm" }}
+                        </div>
+
+                        <!-- Image Preview -->
+                        {% if recipe.image %}
+                        <div class="text-center mb-4">
+                            <img
+                                src="{{ recipe.image.url }}"
+                                alt="Recipe Image"
+                                class="img-fluid rounded shadow-sm"
+                                style="max-width: 100%; height: auto; transition: transform 0.3s"
+                            />
+                        </div>
+                        {% endif %}
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-lg px-5 py-2 fw-bold"
+                                style="border-radius: 50px; transition: all 0.3s ease"
+                            >
+                                Update Recipe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    .btn-primary:hover {
+        background-color: #0d6efd !important;
+        transform: scale(1.05);
+    }
+    img:hover {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
+

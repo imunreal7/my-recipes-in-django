@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Page Title -->
+            <h1 class="text-center display-5 mb-4 text-warning fw-bold">
+                Add Your Review for {{ recipe.title }}
+            </h1>
+
+            <!-- Form Card -->
+            <div class="card shadow border-0 rounded-3">
+                <div class="card-body px-4 py-5">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Rating Dropdown -->
+                        <div class="mb-4">
+                            <label for="rating" class="form-label fw-bold">Rating</label>
+                            <select
+                                class="form-select form-select-lg"
+                                id="rating"
+                                name="rating"
+                                required
+                            >
+                                <option value="" disabled selected>Select a rating</option>
+                                <option value="1">1 Star</option>
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                        </div>
+
+                        <!-- Comment Section -->
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-bold">Your Review</label>
+                            <textarea
+                                class="form-control"
+                                id="comment"
+                                name="comment"
+                                rows="5"
+                                placeholder="Write your review here..."
+                                required
+                            >
+{{ form.comment.value }}</textarea
+                            >
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button
+                                type="submit"
+                                class="btn btn-warning btn-lg px-5 py-2 fw-bold shadow-lg"
+                                style="
+                                    border-radius: 50px;
+                                    transition: all 0.3s ease;
+                                    background-image: linear-gradient(45deg, #ffac33, #ff5722);
+                                "
+                            >
+                                Submit Review
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Style for Enhanced Appearance -->
+<style>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-select,
+    .form-control {
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .form-select:hover,
+    .form-control:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+        background-image: linear-gradient(45deg, #ff5722, #ffac33);
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+

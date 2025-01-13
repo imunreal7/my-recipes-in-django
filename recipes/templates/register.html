@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block content %}
+<section class="auth-section py-5">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="auth-card shadow-sm rounded-4 p-4 bg-white w-100" style="max-width: 450px">
+            <h2 class="text-center mb-4" style="font-weight: 600; color: #333">Register</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Username:</label>
+                    <input
+                        type="text"
+                        name="username"
+                        maxlength="150"
+                        required
+                        id="id_username"
+                        class="form-control"
+                    />
+                    <small class="text-muted"
+                        >50 characters or fewer. Letters, digits and @/./+/-/_ only.</small
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">Password:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        id="id_password"
+                        class="form-control"
+                    />
+                    <small class="text-muted">
+                        Your password must contain at least 8 characters.<br />
+                        Your password can’t be a commonly used password.<br />
+                        Your password can’t be entirely numeric.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="id_password2" class="form-label">Password confirmation:</label>
+                    <input
+                        type="password"
+                        name="password2"
+                        required
+                        id="id_password2"
+                        class="form-control"
+                    />
+                </div>
+                <div class="text-center mb-3">
+                    <button
+                        type="submit"
+                        class="btn btn-success btn-lg w-100"
+                        style="border-radius: 50px; max-width: 200px"
+                    >
+                        Register
+                    </button>
+                </div>
+            </form>
+            <div class="text-center mt-4">
+                <p class="text-muted" style="font-size: 0.9rem">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="text-primary">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .auth-section {
+        background-color: #f7f7f7;
+        min-height: 100vh;
+    }
+
+    .auth-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .auth-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+

@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+<section class="auth-section py-5">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="auth-card shadow-sm rounded-4 p-4 bg-white w-100" style="max-width: 400px">
+            <h2 class="text-center mb-4" style="font-weight: 600; color: #333">Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Username:</label>
+                    <input
+                        type="text"
+                        name="username"
+                        required
+                        id="id_username"
+                        class="form-control"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="id_password" class="form-label">Password:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        id="id_password"
+                        class="form-control"
+                    />
+                </div>
+                <div class="text-center mb-3">
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg w-100"
+                        style="border-radius: 50px; max-width: 200px"
+                    >
+                        Login
+                    </button>
+                </div>
+            </form>
+            <p class="text-center">
+                <a href="{% url 'password-reset' %}" class="text-muted" style="font-size: 0.9rem"
+                    >Forgot Password?</a
+                >
+            </p>
+            <div class="text-center mt-4">
+                <p class="text-muted" style="font-size: 0.9rem">
+                    Don't have an account?
+                    <a href="{% url 'register' %}" class="text-primary">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .auth-section {
+        background-color: #f7f7f7;
+        min-height: 100vh;
+    }
+
+    .auth-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .auth-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
