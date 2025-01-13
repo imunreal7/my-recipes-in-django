@@ -13,6 +13,62 @@ A Django-based web application that allows users to manage recipes, reviews, and
 -   Manage categories (add, update, delete)
 -   Responsive design for user-friendly navigation
 
+## Screenshots
+
+Below are some screenshots of the Recipe App:
+
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Profile Page
+
+![Profile Page](screenshots/profile.png)
+
+### Categories Page
+
+![Categories Page](screenshots/categories.png)
+
+### Add Recipe Page
+
+![Add Recipe Page](screenshots/add_recipe.png)
+
+### Explore Recipes Page
+
+![Explore Recipes Page](screenshots/explore_recipes.png)
+
+### Recipe Details Page (View 1)
+
+![Recipe Details Page 1](screenshots/recipe_detail1.png)
+
+### Recipe Details Page (View 2)
+
+![Recipe Details Page 2](screenshots/recipe_detail2.png)
+
+### Login Page
+
+![Login Page](screenshots/login.png)
+
+### Register Page
+
+![Register Page](screenshots/register.png)
+
+### Edit Profile Page
+
+![Edit Profile Page](screenshots/edit_profile.png)
+
+### Update Recipe Page (View 1)
+
+![Update Recipe Page 1](screenshots/update_recipe1.png)
+
+### Update Recipe Page (View 2)
+
+![Update Recipe Page 2](screenshots/update_recipe2.png)
+
+### Chefs and Newsletter Page
+
+![Chefs and Newsletter Page](screenshots/chefs_and_newsletter.png)
+
 ## Project Structure
 
 ```
@@ -113,62 +169,6 @@ Here are the main URLs for the application:
 -   `/categories/` - View categories
 -   `/categories/<int:category_id>/update/` - Update a category
 -   `/categories/<int:category_id>/delete/` - Delete a category
-
-## Screenshots
-
-Below are some screenshots of the Recipe App:
-
-### Home Page
-
-![Home Page](screenshots/home.png)
-
-### Profile Page
-
-![Profile Page](screenshots/profile.png)
-
-### Categories Page
-
-![Categories Page](screenshots/categories.png)
-
-### Add Recipe Page
-
-![Add Recipe Page](screenshots/add_recipe.png)
-
-### Explore Recipes Page
-
-![Explore Recipes Page](screenshots/explore_recipes.png)
-
-### Recipe Details Page (View 1)
-
-![Recipe Details Page 1](screenshots/recipe_detail1.png)
-
-### Recipe Details Page (View 2)
-
-![Recipe Details Page 2](screenshots/recipe_detail2.png)
-
-### Login Page
-
-![Login Page](screenshots/login.png)
-
-### Register Page
-
-![Register Page](screenshots/register.png)
-
-### Edit Profile Page
-
-![Edit Profile Page](screenshots/edit_profile.png)
-
-### Update Recipe Page (View 1)
-
-![Update Recipe Page 1](screenshots/update_recipe1.png)
-
-### Update Recipe Page (View 2)
-
-![Update Recipe Page 2](screenshots/update_recipe2.png)
-
-### Chefs and Newsletter Page
-
-![Chefs and Newsletter Page](screenshots/chefs_and_newsletter.png)
 
 ## Contributing
 
