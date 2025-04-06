@@ -1,7 +1,8 @@
 # Python
-*.pyc
-*.pyo
+*.py[cod]
 *.pyd
+*.pyo
+*.so
 __pycache__/
 *.env
 
@@ -12,18 +13,13 @@ media/
 
 # Environment
 .env
+venv/
 .DS_Store
 
 # VSCode
 .vscode/
 
-# Byte-compiled / optimized / DLL files
-*.py[cod]
-*.pyd
-*.pyo
-*.so
-
-# Cache files
+# Temporary files
 *.swp
 *.swo
 *.bak
@@ -33,8 +29,13 @@ htmlcov/
 .coverage
 .coverage.*
 
-# Migrations
-migrations/
+# Migrations cache
+**/migrations/*.pyc
+**/migrations/__pycache__/
 
 # Pytest
 .pytest_cache/
+
+# Node (if using npm/Tailwind)
+node_modules/
+package-lock.json
