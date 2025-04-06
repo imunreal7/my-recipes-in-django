@@ -104,3 +104,9 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+
+import os
+
+# For collecting static files in production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
