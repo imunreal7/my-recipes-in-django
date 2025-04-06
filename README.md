@@ -1,6 +1,6 @@
 # Recipe App
 
-A Django-based web application that allows users to manage recipes, reviews, and categories. Users can register, log in, add, edit, and delete recipes, as well as reset passwords.
+A Django-based web application that allows users to manage recipes, reviews, and categories. Users can register, log in, add, edit, and delete recipes, as well as reset passwords. [Check it out here!](https://my-recipes-in-django.onrender.com/) 🚀
 
 ## Features
 
